@@ -1,0 +1,64 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stmarkdown.css">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+</head>
+<h1><a href="#homework-4" id="homework-4">Homework 4</a></h1>
+<h3><a href="#yawen-zhou-mbbs-mhs-candidate" id="yawen-zhou-mbbs-mhs-candidate">Yawen Zhou, MBBS (MHS Candidate)</a></h3>
+<p><strong>Background:</strong> In homework 4, we performed a data simulation process and visualize the simulated data distribution via histogram.</p>
+<p><strong>Methods:</strong> We first set the number of observations in the dataset to 30, and then generated an &ldquo;age&rdquo; variable with a mean of 57 years and a standard deviation of 15 from normal distribution, and an &ldquo;age_t&rdquo; variable with the same mean and standard deviation from t distribution. To visualize the simulated data, we created two histograms showing the distribution of &ldquo;age&rdquo; (shown in orange) and &ldquo;age_t&rdquo; (shown in blue) overlaid by a theoretical normal distribution curve.</p>
+<pre><code>. clear
+
+. 
+. set obs 30
+
+. 
+. gen age = (rnormal() * 15) + 57
+
+. gen age_t=(rt(_N)*15)+57
+
+. 
+. hist age, ///
+&gt;    fcolor(orange%40) /// simulated normal 
+&gt;    addplot(hist age_t, fcolor(midblue%50)) /// simulated t-distribution 
+&gt;    normal /// theoretical normal
+&gt;    legend(on ///
+&gt;       lab(1 &quot;Sampled from Normal&quot;) ///
+&gt;           lab(2 &quot;Theoretical Normal&quot;) ///
+&gt;           lab(3 &quot;Sampled from t-distribution&quot;) ///
+&gt;           ) ///
+&gt;         note(&quot;Based on simulated data&quot;, size(small)) 
+
+. graph export hw4_histogram.png, replace
+
+. 
+</code></pre>
+<p><img src="Graph.svg" ></p>
+<pre><code>
+. 
+. 
+</code></pre>
+<pre><code>. display c(N) 
+30
+
+. display c(k)  
+2
+
+. list in 1/5 
+
+     +-----------------------+
+     |       age       age_t |
+     |-----------------------|
+  1. | 82.335955    27.71921 |
+  2. | 55.082802   65.855139 |
+  3. |  54.34696   46.712831 |
+  4. | 48.991309   80.863075 |
+  5. | 71.783561    39.41721 |
+     +-----------------------+
+
+</code></pre>
+<p><strong>Results:</strong> The histogram (orange) sampled from normal distribution follows the distribution of ${Age, years} \sim \mathcal{N}(\mu = 57, \sigma^2 = 225)$. It looks normally distributed approximately in line with the theoretical normal curve. The histogram (blue) sampled from t distribution follows the distribution of ${Age, years} \sim t(30)$ scaled by 15 and shifted by 57. It does not look normally distributed.</p>
