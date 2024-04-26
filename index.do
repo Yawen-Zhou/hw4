@@ -6,7 +6,7 @@
 ### Yawen Zhou, MBBS (MHS Candidate)
 
 **Background:** 
-In homework 4, we performed a data simulation process and visualize the simulated data distribution via histogram.
+In homework 4, we performed a data simulation process and visualized the simulated data distribution via histogram.
 
 
 **Methods:** 
